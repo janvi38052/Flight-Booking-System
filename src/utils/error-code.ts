@@ -1,0 +1,8 @@
+// src/common/enums/error-codes.enum.ts
+export enum ErrorCodes {
+    BOOKING_NOT_FOUND = 'BOOKING_NOT_FOUND',
+    INVALID_BOOKING_DATA = 'INVALID_BOOKING_DATA',
+    INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
+    INVALID_REQUEST = 'INVALID_REQUEST',
+  }
+  

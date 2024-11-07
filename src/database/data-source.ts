@@ -1,19 +1,21 @@
+import { DataSource } from "typeorm";
+import * as dotenv from "dotenv";
 
-import { Flight } from "src/flights/flights.entity";
-import { Booking } from "src/bookings/bookings.entity";
-import { Passenger } from "src/passengers/passengers.entity";
-
-const { DataSource } = require("typeorm");
+dotenv.config();
 
 module.exports = new DataSource({
-  type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "root",
-  database: "api",
-  entities: [Flight,Passenger,Booking],
-  migrations: ["src/database/migrations/*.ts"],  
-  synchronize: false,  
-  logging: true,
+  type: process.env.DB_TYPE as "mysql",
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  entities: [
+    __dirname + "/../flights/flights.entity.ts",
+    __dirname + "/../bookings/bookings.entity.ts",
+    __dirname + "/../passengers/passengers.entity.ts"
+  ],
+  migrations: ["src/database/migrations/*.ts"],
+  synchronize: process.env.DB_SYNCHRONIZE === 'true',
+  logging: process.env.DB_LOGGING === 'true',
 });
